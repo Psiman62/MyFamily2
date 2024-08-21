@@ -30,6 +30,7 @@ namespace Api
             var result = new WeatherResponse()
             {
                 Forecasts = forecasts,
+                ServerInfo = new ServerInfo(ThisAssembly.AssemblyFileVersion),
             };
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(result);

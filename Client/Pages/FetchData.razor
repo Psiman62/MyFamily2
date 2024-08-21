@@ -36,9 +36,18 @@ else
         </tbody>
     </table>
 }
+@if (serverInfo is null)
+{
+    <p><em>No server info!</em></p>
+}
+else
+{
+    <p>Server file version: <em>@serverInfo.FileVersion</em></p>
+}
 
 @code {
     private WeatherForecast[] forecasts = Array.Empty<WeatherForecast>();
+    private ServerInfo? serverInfo = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -46,6 +55,7 @@ else
         {
             var response = await Http.GetFromJsonAsync<WeatherResponse>("/api/WeatherForecast") ?? new WeatherResponse() { };
             forecasts = response.Forecasts ?? Array.Empty<WeatherForecast>();
+            serverInfo = response.ServerInfo;
         }
         catch (Exception ex)
         {

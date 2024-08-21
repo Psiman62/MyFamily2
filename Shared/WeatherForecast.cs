@@ -2,9 +2,19 @@
 
 namespace BlazorApp.Shared
 {
+    public class ServerInfo
+    {
+        public string FileVersion { get; set; }
+
+        public ServerInfo(string fileVersion)
+        {
+            FileVersion = fileVersion;
+        }
+    }
     public class WeatherResponse
     {
         public WeatherForecast[] Forecasts { get; set; }
+        public ServerInfo ServerInfo { get; set; }
     }
     public class WeatherForecast
     {
