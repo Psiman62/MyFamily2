@@ -2,6 +2,10 @@
 
 namespace BlazorApp.Shared
 {
+    public class WeatherResponse
+    {
+        public WeatherForecast[] Forecasts { get; set; }
+    }
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
