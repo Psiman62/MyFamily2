@@ -3,7 +3,7 @@ using DTOMaker.Models.MessagePack;
 
 namespace Models
 {
-    [Entity()][EntityTag(1)]
+    [Entity()][EntityKey(1)]
     public interface ITestDTO
     {
         [Member(1)] string FamilyName { get; set; }
