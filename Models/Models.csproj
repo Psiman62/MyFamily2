@@ -7,10 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DTOMaker.Models" Version="0.53.2" />
-		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.53.3" />
-		<PackageReference Include="DTOMaker.MessagePack" Version="0.53.3" />
-		<PackageReference Include="DTOMaker.Runtime.MessagePack" Version="0.53.3" />
+		<PackageReference Include="DTOMaker.Models" Version="0.53.3" />
+		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.53.5" />
+		<PackageReference Include="DTOMaker.MessagePack" Version="0.53.5" />
+		<PackageReference Include="DTOMaker.Runtime.MessagePack" Version="0.53.5" />
 		<PackageReference Include="MessagePack" Version="3.1.1" />
 	</ItemGroup>
 
