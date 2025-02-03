@@ -32,8 +32,9 @@ namespace Api
                 Forecasts = forecasts,
                 ServerInfo = new ServerInfo(
                     ThisAssembly.AssemblyFileVersion,
-                    Environment.MachineName,
-                    Environment.OSVersion.ToString()),
+                    Environment.OSVersion.ToString(),
+                    DateTimeOffset.Now.ToString("O"),
+                    Environment.TickCount64),
             };
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(result);
