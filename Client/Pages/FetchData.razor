@@ -37,48 +37,52 @@ else
         </tbody>
     </table>
 }
-@if (serverInfo is null || errorMessage is not null)
+@if (requestDuration is null)
 {
+    <p><em>Requesting...</em></p>
+}
+else
+{
+    <p>Client version   : <em>@ThisAssembly.AssemblyFileVersion</em></p>
+    <p>Request time (ms): <em>@requestDuration.Value.TotalMilliseconds</em></p>
+    @if (serverInfo is null)
+    {
+        <p><em>No server info!</em></p>
+    }
+    else
+    {
+        <p>Server version   : <em>@serverInfo.FileVersion</em></p>
+        <p>Server Timestamp : <em>@serverInfo.OSTimestamp</em></p>
+    }
     @if (errorMessage is not null)
     {
         <p><em>@errorMessage</em></p>
     }
-    @if (serverInfo is null)
-    {
-        <p><em>Requesting...</em></p>
-    }
-}
-else
-{
-    <p>Server file version : <em>@serverInfo.FileVersion</em></p>
-    <p>Server OS VersionId : <em>@serverInfo.OSVersionId</em></p>
-    <p>Server OS Timestamp : <em>@serverInfo.OSTimestamp</em></p>
-    <p>Server OS TickCount : <em>@serverInfo.TickCount64</em></p>
-    <p>Request latency (ms): <em>@requestLatency.TotalMilliseconds</em></p>
 }
 
 @code {
     private WeatherForecast[] forecasts = Array.Empty<WeatherForecast>();
     private ServerInfo? serverInfo = null;
-    private TimeSpan requestLatency = TimeSpan.Zero;
     private string? errorMessage = null;
+    private TimeSpan? requestDuration = null;
 
     protected override async Task OnInitializedAsync()
     {
+        long t0 = Stopwatch.GetTimestamp();
         serverInfo = null;
         errorMessage = null;
+        requestDuration = null;
         try
         {
-            long t0 = Stopwatch.GetTimestamp();
             var response = await Http.GetFromJsonAsync<WeatherResponse>("/api/WeatherForecast") ?? new WeatherResponse() { };
             forecasts = response.Forecasts ?? Array.Empty<WeatherForecast>();
             serverInfo = response.ServerInfo;
-            long tz = Stopwatch.GetTimestamp();
-            requestLatency = TimeSpan.FromTicks(tz - t0);
         }
         catch (Exception ex)
         {
             errorMessage = $"{ex.GetType().Name}: {ex.Message}";
         }
+        long tz = Stopwatch.GetTimestamp();
+        requestDuration = TimeSpan.FromTicks(tz - t0);
     }
 }
