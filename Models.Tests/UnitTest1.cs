@@ -1,6 +1,6 @@
-using FluentAssertions;
 using MessagePack;
 using Models.MessagePack;
+using Shouldly;
 using Xunit;
 
 namespace Models.Tests
@@ -18,10 +18,10 @@ namespace Models.Tests
             var buffer = MessagePackSerializer.Serialize<TestDTO>(orig);
             var copy = MessagePackSerializer.Deserialize<TestDTO>(buffer);
 
-            copy.Should().Be(orig);
-            copy.Equals(orig).Should().BeTrue();
+            copy.ShouldBe(orig);
+            copy.Equals(orig).ShouldBeTrue();
 
-            copy.GetFullLegalName().Should().Be("Aldwin SMITH");
+            copy.GetFullLegalName().ShouldBe("Aldwin SMITH");
         }
 
         [Fact]
@@ -36,10 +36,10 @@ namespace Models.Tests
             var buffer = MessagePackSerializer.Serialize<TestDTO>(orig);
             var copy = MessagePackSerializer.Deserialize<TestDTO>(buffer);
 
-            copy.Should().Be(orig);
-            copy.Equals(orig).Should().BeTrue();
+            copy.ShouldBe(orig);
+            copy.Equals(orig).ShouldBeTrue();
 
-            copy.GetFullLegalName().Should().Be("Aldwin Bracus Cayman SMITH");
+            copy.GetFullLegalName().ShouldBe("Aldwin Bracus Cayman SMITH");
         }
     }
 }
