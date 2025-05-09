@@ -1,8 +1,8 @@
 ﻿namespace BlazorApp.Shared
 {
-    public class WeatherResponse
+    public class ServerResponse
     {
-        public WeatherForecast[] Forecasts { get; set; }
+        public SampleRecord[] Forecasts { get; set; }
         public ServerInfo ServerInfo { get; set; }
     }
 }

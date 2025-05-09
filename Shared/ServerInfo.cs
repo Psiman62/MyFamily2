@@ -1,5 +1,12 @@
 ﻿namespace BlazorApp.Shared
 {
+    public static class Constant
+    {
+        public static class ServerUrl
+        {
+            public const string ServerFunc1 = nameof(ServerFunc1);
+        }
+    }
     public class ServerInfo
     {
         public string FileVersion { get; set; }

@@ -2,7 +2,7 @@
 
 namespace BlazorApp.Shared
 {
-    public class WeatherForecast
+    public class SampleRecord
     {
         public DateTime Date { get; set; }
 

@@ -15,19 +15,19 @@ namespace Api
             _logger = loggerFactory.CreateLogger<HttpTrigger>();
         }
 
-        [Function("WeatherForecast")]
+        [Function(Constant.ServerUrl.ServerFunc1)]
         public async Task<HttpResponseData> RunAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
         {
             var randomNumber = new Random();
             var temp = 0;
 
-            var forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var forecasts = Enumerable.Range(1, 5).Select(index => new SampleRecord
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = temp = randomNumber.Next(-20, 55),
                 Summary = GetSummary(temp)
             }).ToArray();
-            var result = new WeatherResponse()
+            var result = new ServerResponse()
             {
                 Forecasts = forecasts,
                 ServerInfo = new ServerInfo(
