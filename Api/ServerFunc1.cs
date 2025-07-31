@@ -6,30 +6,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Api
 {
-    public class HttpTrigger
+    public class ServerFunc1
     {
         private readonly ILogger _logger;
 
-        public HttpTrigger(ILoggerFactory loggerFactory)
+        public ServerFunc1(ILoggerFactory loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<HttpTrigger>();
+            _logger = loggerFactory.CreateLogger<ServerFunc1>();
         }
 
         [Function(Constant.ServerUrl.ServerFunc1)]
         public async Task<HttpResponseData> RunAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
         {
-            var randomNumber = new Random();
-            var temp = 0;
-
-            var forecasts = Enumerable.Range(1, 5).Select(index => new SampleRecord
+            var result = new ServerFunc1Response()
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = temp = randomNumber.Next(-20, 55),
-                Summary = GetSummary(temp)
-            }).ToArray();
-            var result = new ServerResponse()
-            {
-                Forecasts = forecasts,
                 ServerInfo = new ServerInfo(
                     ThisAssembly.AssemblyFileVersion,
                     DateTimeOffset.Now.ToString("O")),

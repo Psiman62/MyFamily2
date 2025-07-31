@@ -1,0 +1,58 @@
+﻿@page "/callfunc1"
+@using BlazorApp.Shared 
+@using System.Diagnostics
+@inject HttpClient Http
+
+<PageTitle>ServerFunc1</PageTitle>
+
+<h1>Call ServerFunc1</h1>
+
+<p>This component demonstrates calling a function on the server.</p>
+
+@if (requestDuration is null)
+{
+    <p><em>Requesting...</em></p>
+}
+else
+{
+    <p>Client version   : <em>@ThisAssembly.AssemblyFileVersion</em></p>
+    <p>Request time (ms): <em>@requestDuration.Value.TotalMilliseconds</em></p>
+    @if (serverInfo is null)
+    {
+        <p><em>No server info!</em></p>
+    }
+    else
+    {
+        <p>Server version   : <em>@serverInfo.FileVersion</em></p>
+        <p>Server Timestamp : <em>@serverInfo.OSTimestamp</em></p>
+    }
+}
+@if (errorMessage is not null)
+{
+    <p><em>@errorMessage</em></p>
+}
+
+@code {
+    private ServerInfo? serverInfo = null;
+    private string? errorMessage = null;
+    private TimeSpan? requestDuration = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var sw = Stopwatch.StartNew();
+        serverInfo = null;
+        errorMessage = null;
+        requestDuration = null;
+        try
+        {
+            var response = await Http.GetFromJsonAsync<ServerFunc1Response>("/api/" + Constant.ServerUrl.ServerFunc1) ?? new ServerFunc1Response() { };
+            serverInfo = response.ServerInfo;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"{ex.GetType().Name}: {ex.Message}";
+        }
+        sw.Stop();
+        requestDuration = sw.Elapsed;
+    }
+}
