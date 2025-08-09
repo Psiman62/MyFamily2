@@ -1,5 +1,5 @@
-using MessagePack;
-using Models.MessagePack;
+using DTOMaker.Runtime.JsonNewtonSoft;
+using Models.JsonNewtonSoft;
 using Shouldly;
 using Xunit;
 
@@ -10,36 +10,22 @@ namespace Models.Tests
         [Fact]
         public void RoundtripTestDTO_A()
         {
-            TestDTO orig = new TestDTO()
+            MyTodoList orig = new MyTodoList()
             {
-                FamilyName = "Smith",
-                GivenName = "Aldwin"
+                Item0 = new MyTodoItem() { Id = 1, Description = "Brush teeth", Started = true },
+                Item1 = new MyTodoItem() { Id = 2, Description = "Turn off A/C" },
+                Item2 = new MyTodoItem() { Id = 3, Description = "Lock door" },
             };
-            var buffer = MessagePackSerializer.Serialize<TestDTO>(orig);
-            var copy = MessagePackSerializer.Deserialize<TestDTO>(buffer);
+            orig.Freeze();
+
+            string buffer = orig.ToJson<MyTodoList>();
+            var copy = buffer.FromJson<MyTodoList>();
+
+            copy.ShouldNotBeNull();
+            copy.Freeze();
 
             copy.ShouldBe(orig);
             copy.Equals(orig).ShouldBeTrue();
-
-            copy.GetFullLegalName().ShouldBe("Aldwin SMITH");
-        }
-
-        [Fact]
-        public void RoundtripTestDTO_B()
-        {
-            TestDTO orig = new TestDTO()
-            {
-                FamilyName = "Smith",
-                GivenName = "Aldwin",
-                OtherNames = "Bracus Cayman",
-            };
-            var buffer = MessagePackSerializer.Serialize<TestDTO>(orig);
-            var copy = MessagePackSerializer.Deserialize<TestDTO>(buffer);
-
-            copy.ShouldBe(orig);
-            copy.Equals(orig).ShouldBeTrue();
-
-            copy.GetFullLegalName().ShouldBe("Aldwin Bracus Cayman SMITH");
         }
     }
 }

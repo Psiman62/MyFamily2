@@ -1,0 +1,91 @@
+﻿@page "/mytasks"
+@using Models
+
+<PageTitle>My Tasks</PageTitle>
+
+<h1>My Tasks</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>State</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in myTodos)
+        {
+            <tr>
+                <td>@todo.Id</td>
+                <td>@todo.State</td>
+                <td>@todo.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p role="status">Task count: @myTodos.Length</p>
+
+<button class="btn btn-primary" @onclick="AddTask">Add Task</button>
+
+<button class="btn btn-danger" @onclick="Clear">Clear All</button>
+
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+@code {
+    private IMyTodoItem[] myTodos = Array.Empty<IMyTodoItem>();
+
+    private void UpdateView(MyTodoList list)
+    {
+        myTodos = list.Items.ToArray();
+    }
+
+    private async Task<MyTodoList> LoadTasks()
+    {
+        string? json = await localStorage.GetItemAsync<string>("myTodos");
+        MyTodoList list = json?.FromJson<MyTodoList>() ?? new MyTodoList();
+        list.Freeze();
+        return list;
+    }
+
+    private async Task SaveTasks(MyTodoList list)
+    {
+        list.Freeze();
+        string json = list.ToJson();
+        await localStorage.SetItemAsync<string>("myTodos", json);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await LoadTasks();
+        UpdateView(list);
+    }
+
+    private async Task LoadUpdateSaveList(Action<MyTodoList> updateFn)
+    {
+        var list = await LoadTasks();
+        var newList = new MyTodoList(list);
+        updateFn(newList);
+        newList.Freeze();
+        await SaveTasks(newList);
+        UpdateView(newList);
+    }
+
+    private async Task Clear()
+    {
+        await LoadUpdateSaveList(list =>
+        {
+            list.Clear();
+        });
+    }
+
+    private async Task AddTask()
+    {
+        await LoadUpdateSaveList(list =>
+        {
+            int newId = list.Items.Count() + 1;
+            list.Add(new MyTodoItem() { Id = newId, Description = "A new task" });
+        });
+    }
+}

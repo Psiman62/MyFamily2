@@ -9,6 +9,9 @@ The live app is published here: https://ashy-wave-08cb34310.5.azurestaticapps.ne
 ## Current features
 - TBD
 
+## In progress
+- client local storage;
+
 ## Future features
 - private to-do list;
 - shared to-do list.
