@@ -18,8 +18,8 @@ namespace Models.Tests
             };
             orig.Freeze();
 
-            string buffer = orig.ToJson<MyTodoList>();
-            var copy = buffer.FromJson<MyTodoList>();
+            string buffer = orig.SerializeToJson<MyTodoList>();
+            var copy = buffer.DeserializeFromJson<MyTodoList>();
 
             copy.ShouldNotBeNull();
             copy.Freeze();

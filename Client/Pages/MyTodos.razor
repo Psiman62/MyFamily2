@@ -44,7 +44,7 @@
     private async Task<MyTodoList> LoadTasks()
     {
         string? json = await localStorage.GetItemAsync<string>("myTodos");
-        MyTodoList list = json?.FromJson<MyTodoList>() ?? new MyTodoList();
+        MyTodoList list = json?.DeserializeFromJson<MyTodoList>() ?? new MyTodoList();
         list.Freeze();
         return list;
     }
@@ -52,7 +52,7 @@
     private async Task SaveTasks(MyTodoList list)
     {
         list.Freeze();
-        string json = list.ToJson();
+        string json = list.SerializeToJson();
         await localStorage.SetItemAsync<string>("myTodos", json);
     }
 
