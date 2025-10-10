@@ -22,6 +22,7 @@ namespace Api
             {
                 ServerInfo = new ServerInfo(
                     ThisAssembly.AssemblyFileVersion,
+                    ThisAssembly.GitCommitDate,
                     DateTimeOffset.Now.ToString("O")),
             };
             var response = req.CreateResponse(HttpStatusCode.OK);

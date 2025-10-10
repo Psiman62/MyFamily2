@@ -16,6 +16,7 @@
 else
 {
     <p>Client version   : <em>@ThisAssembly.AssemblyFileVersion</em></p>
+    <p>Client CommitDate: <em>@ThisAssembly.GitCommitDate.ToString("O")</em></p>
     <p>Request time (ms): <em>@requestDuration.Value.TotalMilliseconds</em></p>
     @if (serverInfo is null)
     {
@@ -24,6 +25,7 @@ else
     else
     {
         <p>Server version   : <em>@serverInfo.FileVersion</em></p>
+        <p>Server CommitDate: <em>@serverInfo.CommitDate</em></p>
         <p>Server Timestamp : <em>@serverInfo.OSTimestamp</em></p>
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BlazorApp.Shared
+﻿using System;
+
+namespace BlazorApp.Shared
 {
     public static class Constant
     {
@@ -11,11 +13,13 @@
     public class ServerInfo
     {
         public string FileVersion { get; set; }
+        public string CommitDate { get; set; }
         public string OSTimestamp { get; set; }
 
-        public ServerInfo(string fileVersion, string oSTimestamp)
+        public ServerInfo(string fileVersion, DateTime commitDate, string oSTimestamp)
         {
             FileVersion = fileVersion;
+            CommitDate = commitDate.ToString("O");
             OSTimestamp = oSTimestamp;
         }
     }
