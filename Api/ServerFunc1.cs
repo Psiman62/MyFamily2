@@ -20,10 +20,12 @@ namespace Api
         {
             var result = new ServerFunc1Response()
             {
-                ServerInfo = new ServerInfo(
-                    ThisAssembly.AssemblyFileVersion,
-                    ThisAssembly.GitCommitDate,
-                    DateTimeOffset.Now.ToString("O")),
+                ServerInfo = new ServerInfo()
+                {
+                    FileVersion = ThisAssembly.AssemblyFileVersion,
+                    CommitDate = ThisAssembly.GitCommitDate.ToString("O"),
+                    OSTimestamp = DateTimeOffset.Now.ToString("O")
+                }
             };
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(result);

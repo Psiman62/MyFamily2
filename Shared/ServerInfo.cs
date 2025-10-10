@@ -16,11 +16,11 @@ namespace BlazorApp.Shared
         public string CommitDate { get; set; }
         public string OSTimestamp { get; set; }
 
-        public ServerInfo(string fileVersion, DateTime commitDate, string oSTimestamp)
-        {
-            FileVersion = fileVersion;
-            CommitDate = commitDate.ToString("O");
-            OSTimestamp = oSTimestamp;
-        }
+        //public ServerInfo(string fileVersion, string commitDate, string oSTimestamp)
+        //{
+        //    FileVersion = fileVersion;
+        //    CommitDate = commitDate;
+        //    OSTimestamp = oSTimestamp;
+        //}
     }
 }
