@@ -62,6 +62,6 @@ else
             errorMessage = $"{ex.GetType().Name}: {ex.Message}";
         }
         long swStop = Stopwatch.GetTimestamp();
-        requestDuration = new TimeSpan(swStop - swStart);
+        requestDuration = Stopwatch.GetElapsedTime(swStart, swStop);
     }
 }
