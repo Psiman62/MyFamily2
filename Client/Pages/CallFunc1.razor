@@ -41,7 +41,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var sw = Stopwatch.StartNew();
+        long swStart = Stopwatch.GetTimestamp();
         serverInfo = null;
         errorMessage = null;
         requestDuration = null;
@@ -54,7 +54,7 @@ else
         {
             errorMessage = $"{ex.GetType().Name}: {ex.Message}";
         }
-        sw.Stop();
-        requestDuration = sw.Elapsed;
+        long swStop = Stopwatch.GetTimestamp();
+        requestDuration = new TimeSpan(swStop - swStart);
     }
 }

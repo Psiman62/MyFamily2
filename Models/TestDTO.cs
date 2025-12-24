@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.JsonNewtonSoft
+namespace Models.JsonSystemText
 {
     public partial class MyTodoList
     {

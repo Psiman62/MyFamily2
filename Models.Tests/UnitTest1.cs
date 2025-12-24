@@ -1,5 +1,5 @@
-using DTOMaker.Runtime.JsonNewtonSoft;
-using Models.JsonNewtonSoft;
+using DTOMaker.Runtime.JsonSystemText;
+using Models.JsonSystemText;
 using Shouldly;
 using Xunit;
 
