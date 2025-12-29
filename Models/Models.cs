@@ -12,8 +12,7 @@ namespace Models
     //    [Member(1)] string ProfileName { get; set; }
     //}
 
-    [Entity]
-    [Id(2)]
+    [Entity(2)]
     public interface IMyTodoList : IEntityBase
     {
         [Member(1)] IMyTodoItem? Item0 { get; set; }
@@ -24,8 +23,7 @@ namespace Models
         IEnumerable<IMyTodoItem> Items { get; }
     }
 
-    [Entity]
-    [Id(3)]
+    [Entity(3)]
     public interface IMyTodoItem : IEntityBase
     {
         [Member(1)] int Id { get; set; }
