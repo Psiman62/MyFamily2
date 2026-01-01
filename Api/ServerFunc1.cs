@@ -3,6 +3,7 @@ using BlazorApp.Shared;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using Models.JsonSystemText;
 
 namespace Api
 {
@@ -27,6 +28,7 @@ namespace Api
                     OSTimestamp = DateTimeOffset.Now.ToString("O")
                 }
             };
+            result.Freeze();
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(result);
 

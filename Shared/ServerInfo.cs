@@ -10,17 +10,10 @@ namespace BlazorApp.Shared
             public const string ServerFunc2 = nameof(ServerFunc2);
         }
     }
-    public class ServerInfo
-    {
-        public string FileVersion { get; set; }
-        public string CommitDate { get; set; }
-        public string OSTimestamp { get; set; }
-
-        //public ServerInfo(string fileVersion, string commitDate, string oSTimestamp)
-        //{
-        //    FileVersion = fileVersion;
-        //    CommitDate = commitDate;
-        //    OSTimestamp = oSTimestamp;
-        //}
-    }
+    //public class ServerInfo
+    //{
+    //    public string FileVersion { get; set; }
+    //    public string CommitDate { get; set; }
+    //    public string OSTimestamp { get; set; }
+    //}
 }

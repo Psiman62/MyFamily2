@@ -33,5 +33,19 @@ namespace Models
 
         string State { get; }
     }
+
+    [Entity(10)]
+    public interface IServerFunc1Response : IEntityBase
+    {
+        [Member(1)] IServerInfo ServerInfo { get; set; }
+    }
+
+    [Entity(11)]
+    public interface IServerInfo : IEntityBase
+    {
+        [Member(1)] string FileVersion { get; set; }
+        [Member(2)] string CommitDate { get; set; }
+        [Member(3)] string OSTimestamp { get; set; }
+    }
 }
 
