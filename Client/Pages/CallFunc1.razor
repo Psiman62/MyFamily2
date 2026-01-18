@@ -15,7 +15,8 @@
 }
 else
 {
-    <p>Client version   : <em>@ThisAssembly.AssemblyFileVersion</em></p>
+    <p>Client version: <em>@ThisAssembly.AssemblyFileVersion</em></p>
+    <p>Client time   : <em>@DateTimeOffset.Now.ToString("R")</em></p>
     <p>Request time (ms): <em>@requestDuration.Value.TotalMilliseconds</em></p>
     @if (serverInfo is null)
     {
@@ -23,8 +24,8 @@ else
     }
     else
     {
-        <p>Server version   : <em>@serverInfo.FileVersion</em></p>
-        <p>Server Timestamp : <em>@serverInfo.OSTimestamp</em></p>
+        <p>Server version: <em>@serverInfo.FileVersion</em></p>
+        <p>Server time   : <em>@serverInfo.Timestamp.ToString("R")</em></p>
     }
 }
 @if (errorMessage is not null)

@@ -1,5 +1,6 @@
 ﻿using DTOMaker.Models;
 using DTOMaker.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -44,8 +45,8 @@ namespace Models
     public interface IServerInfo : IEntityBase
     {
         [Member(1)] string FileVersion { get; set; }
-        [Member(2)] string CommitDate { get; set; }
-        [Member(3)] string OSTimestamp { get; set; }
+        [Member(2, NativeType.Int64, typeof(DateTimeConverter))] DateTime CommitDate { get; set; }
+        [Member(3, NativeType.PairOfInt64, typeof(DateTimeOffsetConverter))] DateTimeOffset Timestamp { get; set; }
     }
 }
 

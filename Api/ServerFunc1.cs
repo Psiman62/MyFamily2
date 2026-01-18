@@ -24,8 +24,8 @@ namespace Api
                 ServerInfo = new ServerInfo()
                 {
                     FileVersion = ThisAssembly.AssemblyFileVersion,
-                    CommitDate = ThisAssembly.GitCommitDate.ToString("O"),
-                    OSTimestamp = DateTimeOffset.Now.ToString("O")
+                    CommitDate = ThisAssembly.GitCommitDate,
+                    Timestamp = DateTimeOffset.Now
                 }
             };
             result.Freeze();
